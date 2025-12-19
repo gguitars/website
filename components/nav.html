@@ -1,0 +1,28 @@
+<nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="flex items-center justify-between h-16 px-6">
+        <div class="flex items-center space-x-4">
+            <a href="index.html" class="font-black text-xl tracking-tighter uppercase">Giungi Guitars</a>
+            <span class="mono text-[10px] text-slate-400 bg-slate-50 px-2 py-1 rounded">V_04.2025</span>
+        </div>
+        <div class="hidden md:flex space-x-6 mono text-[11px] uppercase font-semibold">
+            <a href="index.html" class="hover:text-blue-600 transition-colors">Home</a>
+            <a href="guitars.html" class="hover:text-blue-600 transition-colors">Guitars</a>
+            <a href="artists.html" class="hover:text-blue-600 transition-colors">Artists</a>
+            <a href="press.html" class="hover:text-blue-600 transition-colors">Press</a>
+            <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact</a>
+        </div>
+        <div class="w-10 h-10 border-l border-slate-200 flex items-center justify-end md:hidden" id="mobile-menu-button">
+            <i data-lucide="menu" id="menu-icon" class="w-5 h-5 text-slate-950 cursor-pointer"></i>
+        </div>
+    </div>
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="hidden" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Home</a>
+            <a href="guitars.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Guitars</a>
+            <a href="artists.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Artists</a>
+            <a href="press.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Press</a>
+            <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Contact</a>
+        </div>
+    </div>
+</nav>

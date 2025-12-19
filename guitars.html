@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Collection - Giungi Guitars</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Manrope:wght@300;400;700;800&display=swap');
+
+        body { font-family: 'Manrope', sans-serif; }
+        .mono { font-family: 'IBM Plex Mono', monospace; }
+
+        .model-panel {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .model-panel.active {
+            display: grid;
+            opacity: 1;
+        }
+        
+        /* Custom Scrollbar for the main content area */
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 3px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
+
+        .nav-item.active {
+            background-color: #f8fafc;
+            border-right: 3px solid #0f172a;
+        }
+        .nav-item.active .model-name { color: #0f172a; }
+        
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .spec-row:last-child { border-bottom: none; }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen bg-white text-slate-900">
+
+    <div id="global-nav"></div>
+
+    <main class="pt-16 min-h-screen flex flex-col lg:flex-row h-screen overflow-hidden">
+        
+        <aside class="w-full lg:w-80 bg-white border-b lg:border-b-0 lg:border-r border-slate-200 lg:h-full flex flex-col z-20 shadow-lg lg:shadow-none">
+            
+            <div class="p-8 pb-4">
+                <h2 class="mono text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <i data-lucide="grid" class="w-3 h-3"></i> The Collection
+                </h2>
+            </div>
+
+            <div class="flex-1 overflow-y-auto custom-scroll flex lg:flex-col overflow-x-auto lg:overflow-visible no-scrollbar">
+                
+                <button onclick="switchModel('jaguar')" id="btn-jaguar" class="nav-item active flex-shrink-0 text-left px-8 py-6 border-b border-slate-100 hover:bg-slate-50 transition-all group w-64 lg:w-full">
+                    <span class="mono text-[10px] text-slate-500 mb-2 block tracking-widest">OFFSET SERIES</span>
+                    <span class="model-name text-xl font-black uppercase text-slate-400 group-hover:text-slate-800 transition-colors">Path Jaguar</span>
+                </button>
+
+                <button onclick="switchModel('jbass')" id="btn-jbass" class="nav-item flex-shrink-0 text-left px-8 py-6 border-b border-slate-100 hover:bg-slate-50 transition-all group w-64 lg:w-full">
+                    <span class="mono text-[10px] text-slate-500 mb-2 block tracking-widest">BASS SERIES</span>
+                    <span class="model-name text-xl font-black uppercase text-slate-400 group-hover:text-slate-800 transition-colors">Path J Bass</span>
+                </button>
+
+                <button onclick="switchModel('sg')" id="btn-sg" class="nav-item flex-shrink-0 text-left px-8 py-6 border-b border-slate-100 hover:bg-slate-50 transition-all group w-64 lg:w-full">
+                    <span class="mono text-[10px] text-slate-500 mb-2 block tracking-widest">SOLID BODY</span>
+                    <span class="model-name text-xl font-black uppercase text-slate-400 group-hover:text-slate-800 transition-colors">Path SG</span>
+                </button>
+
+                <button onclick="switchModel('lp')" id="btn-lp" class="nav-item flex-shrink-0 text-left px-8 py-6 border-b border-slate-100 hover:bg-slate-50 transition-all group w-64 lg:w-full">
+                    <span class="mono text-[10px] text-slate-500 mb-2 block tracking-widest">SOLID BODY</span>
+                    <span class="model-name text-xl font-black uppercase text-slate-400 group-hover:text-slate-800 transition-colors">Path Les Paul</span>
+                </button>
+            </div>
+
+            <div class="p-8 bg-slate-50 border-t border-slate-200 hidden lg:block">
+                <i data-lucide="quote" class="w-6 h-6 text-slate-300 mb-4"></i>
+                <p class="text-sm text-slate-600 italic leading-relaxed mb-4">
+                    "My models feature unique and innovative shapes. The era of replicas is over. I advocate for a new expressive movement of bespoke guitars and basses, built to meet specific stylistic needs and satisfy the most daring creativity."
+                </p>
+                <div class="mono text-xs font-bold text-slate-950 uppercase">— Federico Giungi</div>
+            </div>
+        </aside>
+
+        <div class="flex-1 relative bg-white h-full overflow-hidden">
+            
+            <article id="model-jaguar" class="model-panel active grid-cols-1 xl:grid-cols-2 h-full overflow-y-auto xl:overflow-hidden">
+                <div class="bg-slate-50 p-8 md:p-12 flex flex-col justify-center border-b xl:border-b-0 xl:border-r border-slate-200 h-full relative">
+                    <div class="absolute top-8 left-8 z-10">
+                        <span class="px-3 py-1 bg-white border border-slate-200 text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">Bolt-On Construction</span>
+                    </div>
+                    
+                    <div class="relative w-full h-full max-h-[600px] flex items-center justify-center p-4 group">
+                        <img id="img-main-jaguar" src="assets/placeholder.webp" class="max-h-full max-w-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    
+                    <div class="flex justify-center gap-4 mt-6">
+                        <button onclick="changeImage('jaguar', 'assets/placeholder.webp')" class="w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-900 transition-colors"></button>
+                        <button onclick="changeImage('jaguar', 'assets/placeholder.webp')" class="w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-900 transition-colors"></button>
+                    </div>
+                </div>
+
+                <div class="p-8 md:p-16 overflow-y-auto custom-scroll h-full flex flex-col">
+                    <h1 class="heading-xl text-5xl md:text-7xl uppercase mb-2 tracking-tight">Path Jaguar</h1>
+                    <span class="text-slate-400 text-xl font-light mb-12 block">The Modern Offset</span>
+                    
+                    <div class="prose prose-lg text-slate-600 leading-relaxed mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-4 border-b border-slate-200 pb-2">The Concept</h3>
+                        <p class="mb-6">
+                            Known for its versatility, my revision of the classic offset brings enhanced sharpness and precision to the format. We have stripped away the clunky vintage switching systems in favor of a streamlined workflow.
+                            
+                            
+
+[Image of electric guitar wiring diagram]
+
+                        </p>
+                        <p>
+                            This marks my first bolt-on model, designed for players who need the snap and articulation that only a bolt-on neck can provide. It is a tool suitable for all genres, from shoegaze textures to precise math-rock.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-lg mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-4">Historical Context</h3>
+                        <p class="text-sm text-slate-500 italic">
+                            "The Jaguar gathered dust until the punk explosion of the '70s took it from surf-rock relic to counter-culture icon. It defied initial expectations to become the standard-bearer for the alternative and indie rock sets."
+                        </p>
+                    </div>
+
+                    <div class="mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-6">Technical Specifications</h3>
+                        <div class="text-sm">
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Body Woods</span>
+                                <span class="mono text-slate-500">Alder, Swamp Ash, or Yellow Pine</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Neck Construction</span>
+                                <span class="mono text-slate-500">Maple w/ Rosewood or Maple Fretboard</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Electronics</span>
+                                <span class="mono text-slate-500">Giungi Single Coil, Humbucker, or P90</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Finish Options</span>
+                                <span class="mono text-slate-500">Gloss or Satin (Custom Colors)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-8 border-t border-slate-100">
+                        <a href="contact.html" class="btn-primary">Start Your Build</a>
+                        <span class="text-xs font-bold uppercase text-slate-400 tracking-widest">Waitlist Open</span>
+                    </div>
+
+                    <footer class="mt-24 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+                        <div class="flex items-center gap-4">
+                            <span class="font-bold uppercase tracking-widest text-slate-900">Giungi Guitars</span>
+                            <span class="hidden md:block w-px h-3 bg-slate-300"></span>
+                            <span class="mono">EST. 2017 // ANCONA, IT</span>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></a>
+                        </div>
+                    </footer>
+
+                </div>
+            </article>
+
+            <article id="model-jbass" class="model-panel grid-cols-1 xl:grid-cols-2 h-full overflow-y-auto xl:overflow-hidden">
+                <div class="bg-slate-50 p-8 md:p-12 flex flex-col justify-center border-b xl:border-b-0 xl:border-r border-slate-200 h-full relative">
+                    <div class="absolute top-8 left-8 z-10">
+                        <span class="px-3 py-1 bg-white border border-slate-200 text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">35" Scale Length</span>
+                    </div>
+                    <div class="relative w-full h-full max-h-[600px] flex items-center justify-center p-4 group">
+                        <img id="img-main-jbass" src="assets/placeholder.webp" class="max-h-full max-w-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                </div>
+
+                <div class="p-8 md:p-16 overflow-y-auto custom-scroll h-full flex flex-col">
+                    <h1 class="heading-xl text-5xl md:text-7xl uppercase mb-2 tracking-tight">Path J Bass</h1>
+                    <span class="text-slate-400 text-xl font-light mb-12 block">The Low End Theory</span>
+                    
+                    <div class="prose prose-lg text-slate-600 leading-relaxed mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-4 border-b border-slate-200 pb-2">The Concept</h3>
+                        <p class="mb-6">
+                            So innovative, yet so familiar. The Path J Bass anticipates your needs, offering a solid and stylish instrument that sounds as good as it looks. 
+                            
+                            
+
+[Image of bass guitar anatomy]
+
+                        </p>
+                        <p>
+                            We have refined the ergonomic contours to improve balance and comfort, allowing for extended playing sessions without shoulder fatigue. The extended 35" scale option provides tighter tension for drop tunings.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-lg mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-4">Historical Context</h3>
+                        <p class="text-sm text-slate-500 italic">
+                            "Dedicated to the iconic Fender Jazz Bass. With its rich cultural legacy, championed by pioneers like Jaco Pastorius, this configuration blends output for a wide spectrum—from bright and crisp to warm and mellow."
+                        </p>
+                    </div>
+
+                    <div class="mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-6">Technical Specifications</h3>
+                        <div class="text-sm">
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Body Woods</span>
+                                <span class="mono text-slate-500">Okoume, Alder, Swamp Ash</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Neck Specs</span>
+                                <span class="mono text-slate-500">35" Scale, 12" Radius</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Electronics</span>
+                                <span class="mono text-slate-500">Giungi Custom Single Coils</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Hardware</span>
+                                <span class="mono text-slate-500">Gotoh Tuners/Bridge, Bone Nut</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-8 border-t border-slate-100">
+                        <a href="contact.html" class="btn-primary">Start Your Build</a>
+                    </div>
+
+                    <footer class="mt-24 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+                        <div class="flex items-center gap-4">
+                            <span class="font-bold uppercase tracking-widest text-slate-900">Giungi Guitars</span>
+                            <span class="hidden md:block w-px h-3 bg-slate-300"></span>
+                            <span class="mono">EST. 2017 // ANCONA, IT</span>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></a>
+                        </div>
+                    </footer>
+                </div>
+            </article>
+
+            <article id="model-sg" class="model-panel grid-cols-1 xl:grid-cols-2 h-full overflow-y-auto xl:overflow-hidden">
+                <div class="bg-slate-50 p-8 md:p-12 flex flex-col justify-center border-b xl:border-b-0 xl:border-r border-slate-200 h-full relative">
+                    <div class="absolute top-8 left-8 z-10">
+                        <span class="px-3 py-1 bg-white border border-slate-200 text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">Set-Neck</span>
+                    </div>
+                    <div class="relative w-full h-full max-h-[600px] flex items-center justify-center p-4 group">
+                        <img id="img-main-sg" src="assets/placeholder.webp" class="max-h-full max-w-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                </div>
+
+                <div class="p-8 md:p-16 overflow-y-auto custom-scroll h-full flex flex-col">
+                    <h1 class="heading-xl text-5xl md:text-7xl uppercase mb-2 tracking-tight">Path SG</h1>
+                    <span class="text-slate-400 text-xl font-light mb-12 block">Sculpted Resonance</span>
+                    
+                    <div class="prose prose-lg text-slate-600 leading-relaxed mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-4 border-b border-slate-200 pb-2">The Concept</h3>
+                        <p class="mb-6">
+                            Revitalized in design and fine-tuned to capture the sound of the 1960s in all its authenticity and gentle roughness. 
+                        </p>
+                        <p>
+                            Crucially, the Path SG design addresses the famous "neck dive" issue common in vintage models. Through careful weight distribution and body sculpting, we have created a balanced instrument perfect for exploring the upper register.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-lg mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-4">Historical Context</h3>
+                        <p class="text-sm text-slate-500 italic">
+                            "A homage to a milestone of rock history. From Angus Young to Tony Iommi, the sharp double-cutaway shape has solidified its place as the weapon of choice for rock and metal."
+                        </p>
+                    </div>
+
+                    <div class="mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-6">Technical Specifications</h3>
+                        <div class="text-sm">
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Body Material</span>
+                                <span class="mono text-slate-500">Okoume or Mahogany</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Fretboard</span>
+                                <span class="mono text-slate-500">Rosewood or Ebony (24.75" Scale)</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Pickups</span>
+                                <span class="mono text-slate-500">Giungi Custom Humbucker or P90</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Hardware</span>
+                                <span class="mono text-slate-500">Kluson Vintage Tuners, Gotoh Bridge</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-8 border-t border-slate-100">
+                        <a href="contact.html" class="btn-primary">Start Your Build</a>
+                    </div>
+
+                    <footer class="mt-24 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+                        <div class="flex items-center gap-4">
+                            <span class="font-bold uppercase tracking-widest text-slate-900">Giungi Guitars</span>
+                            <span class="hidden md:block w-px h-3 bg-slate-300"></span>
+                            <span class="mono">EST. 2017 // ANCONA, IT</span>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></a>
+                        </div>
+                    </footer>
+                </div>
+            </article>
+
+            <article id="model-lp" class="model-panel grid-cols-1 xl:grid-cols-2 h-full overflow-y-auto xl:overflow-hidden">
+                <div class="bg-slate-50 p-8 md:p-12 flex flex-col justify-center border-b xl:border-b-0 xl:border-r border-slate-200 h-full relative">
+                    <div class="absolute top-8 left-8 z-10">
+                        <span class="px-3 py-1 bg-white border border-slate-200 text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">Carved Top</span>
+                    </div>
+                    <div class="relative w-full h-full max-h-[600px] flex items-center justify-center p-4 group">
+                        <img id="img-main-lp" src="assets/placeholder.webp" class="max-h-full max-w-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                </div>
+
+                <div class="p-8 md:p-16 overflow-y-auto custom-scroll h-full flex flex-col">
+                    <h1 class="heading-xl text-5xl md:text-7xl uppercase mb-2 tracking-tight">Path Les Paul</h1>
+                    <span class="text-slate-400 text-xl font-light mb-12 block">The Reason I Became A Luthier</span>
+                    
+                    <div class="prose prose-lg text-slate-600 leading-relaxed mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-4 border-b border-slate-200 pb-2">The Concept</h3>
+                        <p class="mb-6">
+                            Simply eternal. The Path LP represents the perfect equilibrium between tone, sustain, and aesthetics. 
+                            
+                        </p>
+                        <p>
+                            My solid body construction minimizes unwanted feedback while maximizing sustain, providing distinct, rich tones—from the warm, mellow neck position to the powerful, biting bridge position.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-lg mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-4">Historical Context</h3>
+                        <p class="text-sm text-slate-500 italic">
+                            "Introduced in the early 1950s, the combination of a solid mahogany body and a carved maple top created a sound that would define rock and roll history."
+                        </p>
+                    </div>
+
+                    <div class="mb-12">
+                        <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-6">Technical Specifications</h3>
+                        <div class="text-sm">
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Body Base</span>
+                                <span class="mono text-slate-500">Old Growth Mahogany</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Carved Top</span>
+                                <span class="mono text-slate-500">Flame Maple or Flame Ash</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Neck Joint</span>
+                                <span class="mono text-slate-500">Deep Set-Neck Tenon</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="font-bold text-slate-900">Electronics</span>
+                                <span class="mono text-slate-500">CTS Pots, Switchcraft, Paper-in-Oil Caps</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-8 border-t border-slate-100">
+                        <a href="contact.html" class="btn-primary">Start Your Build</a>
+                        <a href="#" class="flex items-center text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-900 transition-colors">
+                            <i data-lucide="play-circle" class="w-4 h-4 mr-2"></i> Audio Sample
+                        </a>
+                    </div>
+
+                    <footer class="mt-24 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+                        <div class="flex items-center gap-4">
+                            <span class="font-bold uppercase tracking-widest text-slate-900">Giungi Guitars</span>
+                            <span class="hidden md:block w-px h-3 bg-slate-300"></span>
+                            <span class="mono">EST. 2017 // ANCONA, IT</span>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a href="#" class="hover:text-slate-900 transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></a>
+                        </div>
+                    </footer>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <script src="js/loader.js"></script>
+    
+    <script>
+        function switchModel(modelId) {
+            // Hide all panels
+            const panels = document.querySelectorAll('.model-panel');
+            panels.forEach(p => p.classList.remove('active'));
+
+            // Deactivate all buttons
+            const btns = document.querySelectorAll('.nav-item');
+            btns.forEach(b => b.classList.remove('active'));
+
+            // Activate specific
+            document.getElementById('model-' + modelId).classList.add('active');
+            document.getElementById('btn-' + modelId).classList.add('active');
+        }
+
+        function changeImage(modelId, src) {
+            const mainImg = document.getElementById('img-main-' + modelId);
+            // Simple fade effect
+            mainImg.style.opacity = '0.5';
+            setTimeout(() => {
+                mainImg.src = src;
+                mainImg.style.opacity = '1';
+            }, 200);
+        }
+    </script>
+</body>
+</html>
