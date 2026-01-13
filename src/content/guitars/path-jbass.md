@@ -53,4 +53,7 @@ History_it: >
   fusion e in molti altri generi ha cementato il suo status iconico.
 Price_en: Ask / on demand.
 Price_it: Chiedi / su richiesta.
+images:
+  - image: /assets/guitars_bass-player-KS7A2931.jpg
+  - image: /assets/guitars_bass-player-KS7A2934-Modifica.jpg
 ---

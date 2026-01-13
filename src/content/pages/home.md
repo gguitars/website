@@ -1,6 +1,17 @@
 ---
 title_en: Giungi Guitars - Handmade Italian Guitars
 title_it: Giungi Guitars - Chitarre Artigianali Italiane
+HeroGuitar: /assets/guitars_lp-burst_IMG_20201123_113527.jpg
+WorkshopGallery:
+  - /assets/misc_workshop_1.jpg
+  - /assets/misc_workshop_2.jpg
+  - /assets/misc_workshop_3.jpg
+  - /assets/misc_giungi_1.jpeg
+  - /assets/misc_giungi_2.jpg
+  - /assets/misc_giungi_3.jpg
+  - /assets/misc_giungi_4.jpg
+  - /assets/misc_giungi_5.jpg
+  - /assets/misc_giungi_6.jpg
 Badges_en:
 - Title: Handmade in Italy
   Icon: hammer

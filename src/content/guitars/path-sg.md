@@ -55,4 +55,5 @@ images:
   - image: /assets/guitars_sg-wood_IMG_20240731_113942.jpg
   - image: /assets/guitars_sg-wood_IMG_20240731_114055.jpg
   - image: /assets/guitars_sg-wood_IMG_20240731_114204.jpg
+  - image: /assets/guitars_sg-player-KS7A2905.jpg
 ---

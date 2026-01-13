@@ -58,7 +58,7 @@ eleventyComputed:
             <div class="flex-1 flex items-center justify-center relative z-10 p-8 md:p-16">
                 <div class="text-center w-full">
                     <div class="bg-white border border-slate-200 shadow-2xl rotate-2 transition-transform hover:rotate-0 duration-500">
-                        <img id="img-main-hero" src="{{ siteData.galleries.hero[0] }}" alt="Hero Guitar" class="w-full h-auto transition-opacity duration-300">
+                        <img id="img-main-hero" src="{{ siteData.pages.home.HeroGuitar }}" alt="Hero Guitar" class="w-full h-auto transition-opacity duration-300">
                     </div>
                 </div>
             </div>
@@ -101,7 +101,7 @@ eleventyComputed:
                 </button>
 
                 <div id="media-container-workshop" class="w-full h-full flex items-center justify-center">
-                    <img id="img-main-workshop" src="{{ siteData.galleries.workshop[0] }}" alt="Workshop" class="shadow-2xl transform -rotate-2 max-w-full h-auto object-contain transition-opacity duration-300">
+                    <img id="img-main-workshop" src="{{ siteData.pages.home.WorkshopGallery[0] }}" alt="Workshop" class="shadow-2xl transform -rotate-2 max-w-full h-auto object-contain transition-opacity duration-300">
                 </div>
 
                 <button onclick="navGallery('workshop', 1)" class="absolute right-4 z-20 w-10 h-10 bg-white/80 border border-slate-200 rounded-full flex items-center justify-center text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-950 hover:text-white shadow-md">
@@ -191,11 +191,11 @@ eleventyComputed:
     const galleryState = {
         'hero': {
             index: 0,
-            images: {{ siteData.galleries.hero | dump | safe }}
+            images: ["{{ siteData.pages.home.HeroGuitar }}"]
         },
         'workshop': {
             index: 0,
-            images: {{ siteData.galleries.workshop | dump | safe }}
+            images: {{ siteData.pages.home.WorkshopGallery | dump | safe }}
         }
     };
 

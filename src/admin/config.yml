@@ -70,6 +70,12 @@ collections:
         fields:
           - {label: "Title (English)", name: "title_en", widget: "string"}
           - {label: "Titolo (Italiano)", name: "title_it", widget: "string"}
+          - {label: "Hero Guitar Image", name: "HeroGuitar", widget: "image"}
+          - label: "Workshop Gallery"
+            name: "WorkshopGallery"
+            widget: "list"
+            summary: "{{fields.image}}"
+            field: {label: "Image", name: "image", widget: "image"}
           - label: "Hero (English)"
             name: "Hero_en"
             widget: "object"

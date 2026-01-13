@@ -68,4 +68,9 @@ images:
   - image: /assets/guitars_lp-wood-1_2.jpg
   - image: /assets/guitars_lp-wood-2__DSC9054.jpg
   - image: /assets/guitars_lp-wood-2__DSC9059.jpg
+  - image: /assets/guitars_lp-player-KS7A2858.jpg
+  - image: /assets/guitars_lp-player-KS7A2866.jpg
+  - image: /assets/guitars_lp-player-KS7A2995.jpg
+  - image: /assets/guitars_lp-player-KS7A3014-Modifica.jpg
+  - image: /assets/guitars_lp-player-KS7A3183-Modifica.jpg
 ---
