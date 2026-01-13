@@ -1,8 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: giungiguitars/new_website
   branch: main
-
-local_backend: true
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
 media_folder: "src/assets"
 public_folder: "/assets"
