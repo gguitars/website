@@ -16,6 +16,7 @@ collections:
     fields:
       - {label: "Name (English)", name: "title_en", widget: "string"}
       - {label: "Nome (Italiano)", name: "title_it", widget: "string"}
+      - {label: "Menu Order", name: "order", widget: "number", default: 50, value_type: "int", hint: "Lower numbers appear first. LP=1, Jazzmaster=2, SG=3, Bass=100. New guitars (default 50) will appear between SG and Bass."}
       - {label: "Subtitle (English)", name: "Subtitle_en", widget: "string"}
       - {label: "Sottotitolo (Italiano)", name: "Subtitle_it", widget: "string"}
       - {label: "Concept (English)", name: "Concept_en", widget: "markdown"}
@@ -59,7 +60,13 @@ collections:
       - {label: "Testimonianza (Italiano)", name: "Testimonial_it", widget: "text"}
       - {label: "Biography (English)", name: "Biography_en", widget: "markdown"}
       - {label: "Biografia (Italiano)", name: "Biography_it", widget: "markdown"}
-      - {label: "Profile Image", name: "image", widget: "image"}
+      - label: "YouTube Videos"
+        name: "videos"
+        widget: "list"
+        summary: "{{fields.title}}"
+        fields:
+          - {label: "YouTube Video ID", name: "id", widget: "string", hint: "The ID from the YouTube URL (e.g., dQw4w9WgXcQ from youtube.com/watch?v=dQw4w9WgXcQ)"}
+          - {label: "Video Title", name: "title", widget: "string"}
 
   - name: "pages"
     label: "Pages (EN/IT)"
@@ -269,9 +276,7 @@ collections:
               - {label: "Outlet Name", name: "Outlet", widget: "string"}
               - {label: "Logo", name: "Logo", widget: "image"}
               - {label: "Article Title", name: "Title", widget: "string"}
-              - {label: "Summary", name: "Summary", widget: "text"}
               - {label: "Clipping Image", name: "Image", widget: "image"}
-              - {label: "Url", name: "Url", widget: "string"}
           - label: "Press Items (Italiano)"
             name: "Items_it"
             widget: "list"
@@ -279,9 +284,7 @@ collections:
               - {label: "Nome Testata", name: "Outlet", widget: "string"}
               - {label: "Logo", name: "Logo", widget: "image"}
               - {label: "Titolo Articolo", name: "Title", widget: "string"}
-              - {label: "Riassunto", name: "Summary", widget: "text"}
               - {label: "Immagine Clipping", name: "Image", widget: "image"}
-              - {label: "Url", name: "Url", widget: "string"}
 
       - file: "src/content/pages/contact.md"
         label: "Contact Page Blurbs"
@@ -329,6 +332,7 @@ collections:
               - {label: "Instagram", name: "Instagram", widget: "string"}
               - {label: "Facebook", name: "Facebook", widget: "string"}
               - {label: "YouTube", name: "YouTube", widget: "string"}
+              - {label: "Trustpilot", name: "Trustpilot", widget: "string"}
           - label: "Footer (Italiano)"
             name: "Footer_it"
             widget: "object"
@@ -338,3 +342,4 @@ collections:
               - {label: "Instagram", name: "Instagram", widget: "string"}
               - {label: "Facebook", name: "Facebook", widget: "string"}
               - {label: "YouTube", name: "YouTube", widget: "string"}
+              - {label: "Trustpilot", name: "Trustpilot", widget: "string"}

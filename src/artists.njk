@@ -19,7 +19,7 @@ eleventyComputed:
                 <span class="mono text-[10px] text-slate-400 tracking-[0.2em] mb-4 block uppercase">
                     {% if locale == 'it' %}Roster{% else %}Roster{% endif %}
                 </span>
-                <h1 class="heading-xl text-5xl md:text-7xl uppercase mb-0 leading-[0.9]">
+                <h1 class="heading-xl page-title-large">
                     {% if locale == 'it' %}I Nostri <br> Artisti{% else %}Our <br> Artists{% endif %}
                 </h1>
             </div>
@@ -36,12 +36,35 @@ eleventyComputed:
 
         {% for artist in collections.artists %}
         <article class="group flex flex-col" data-artist="{{ artist.fileSlug }}">
-            <div class="bg-slate-950 border border-slate-200 overflow-hidden mb-8 relative">
-                <!-- Fallback to image -->
-                <div class="aspect-[4/3] flex items-center justify-center">
-                    <img src="{{ artist.data.image | default('/assets/placeholder.webp') }}" 
-                         alt="{{ artist.data | localeField('title', locale) }}" 
-                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 contrast-110">
+            <div class="bg-slate-950 border border-slate-200 overflow-hidden mb-8 relative group/video">
+                <div class="aspect-video">
+                    {% if artist.data.videos and artist.data.videos.length > 0 %}
+                    <iframe 
+                        id="video-{{ artist.fileSlug }}"
+                        class="w-full h-full"
+                        src="https://www.youtube.com/embed/{{ artist.data.videos[0].id }}" 
+                        title="{{ artist.data.videos[0].title }}"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                    
+                    {% if artist.data.videos.length > 1 %}
+                    <button onclick="navArtistVideo('{{ artist.fileSlug }}', -1)" 
+                            class="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-slate-900 opacity-0 group-hover/video:opacity-100 transition-opacity hover:bg-white">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="navArtistVideo('{{ artist.fileSlug }}', 1)" 
+                            class="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-slate-900 opacity-0 group-hover/video:opacity-100 transition-opacity hover:bg-white">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20" id="dots-{{ artist.fileSlug }}">
+                        {% for video in artist.data.videos %}
+                        <span class="w-2 h-2 rounded-full {% if loop.index0 == 0 %}bg-white{% else %}bg-white/40{% endif %}"></span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endif %}
                 </div>
                 
                 <div class="absolute bottom-0 left-0 bg-white border-t border-r border-slate-200 p-2">
@@ -107,3 +130,34 @@ eleventyComputed:
     </div>
 
 </main>
+
+<script>
+    const artistVideos = {
+        {% for artist in collections.artists %}
+        '{{ artist.fileSlug }}': {
+            index: 0,
+            videos: {{ artist.data.videos | dump | safe }}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    };
+
+    function navArtistVideo(slug, direction) {
+        const state = artistVideos[slug];
+        if (!state || !state.videos || state.videos.length <= 1) return;
+        
+        state.index = (state.index + direction + state.videos.length) % state.videos.length;
+        const iframe = document.getElementById('video-' + slug);
+        if (iframe) {
+            iframe.src = 'https://www.youtube.com/embed/' + state.videos[state.index].id;
+        }
+        
+        // Update dots
+        const dotsContainer = document.getElementById('dots-' + slug);
+        if (dotsContainer) {
+            const dots = dotsContainer.querySelectorAll('span');
+            dots.forEach((dot, i) => {
+                dot.className = 'w-2 h-2 rounded-full ' + (i === state.index ? 'bg-white' : 'bg-white/40');
+            });
+        }
+    }
+</script>

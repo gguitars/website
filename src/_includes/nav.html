@@ -6,9 +6,6 @@
                 <img src="{{ nav.BrandLogo | default('/assets/loghi_Giungi-PNG24.png') }}" alt="{{ nav.Brand }}"
                     class="h-12 md:h-16 w-auto">
             </a>
-            <span class="mono text-[10px] text-slate-400 bg-slate-50 px-2 py-1 rounded">
-                {{ nav.Version }}
-            </span>
         </div>
         <div class="hidden md:flex items-center space-x-8 mono text-[12px] uppercase font-bold tracking-wider">
             <a href="/{% if locale == 'it' %}it/{% endif %}"
@@ -27,6 +24,7 @@
                 class="text-slate-500 hover:text-slate-950 transition-colors">
                 {% if locale == 'it' %}Stampa{% else %}Press{% endif %}
             </a>
+
             <a href="/{% if locale == 'it' %}it/{% endif %}contact/"
                 class="text-slate-500 hover:text-slate-950 transition-colors">
                 {% if locale == 'it' %}Contatti{% else %}Contact{% endif %}
@@ -70,6 +68,7 @@
                 class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">
                 {% if locale == 'it' %}Stampa{% else %}Press{% endif %}
             </a>
+
             <a href="/{% if locale == 'it' %}it/{% endif %}contact/"
                 class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">
                 {% if locale == 'it' %}Contatti{% else %}Contact{% endif %}

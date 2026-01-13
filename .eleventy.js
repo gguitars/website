@@ -40,7 +40,7 @@ module.exports = function (eleventyConfig) {
       item.data.slug = folderName;
       item.data.images = images;
       return item;
-    });
+    }).sort((a, b) => (a.data.order || 50) - (b.data.order || 50));
   });
 
   eleventyConfig.addCollection("artists", function (collectionApi) {

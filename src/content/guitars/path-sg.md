@@ -1,6 +1,7 @@
 ---
 title_en: PATH SG TRIBUTE
 title_it: PATH SG TRIBUTE
+order: 3
 Subtitle_en: Sculpted Resonance
 Subtitle_it: Risonanza Scolpita
 Concept_en: >

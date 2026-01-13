@@ -54,5 +54,7 @@ Testimonial_en: My Giungi is a clean machine for working out dirty riffs or shre
   on classic licks.
 Testimonial_it: La mia Giungi è una macchina pulita per elaborare riff sporchi o fare
   shredding su lick classici.
-image: /assets/artists_will-brennan.jpg
+videos:
+  - id: "lwI1TsiG7yY"
+    title: "WB"
 ---

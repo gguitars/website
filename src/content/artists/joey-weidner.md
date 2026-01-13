@@ -40,5 +40,7 @@ Testimonial_en: These are truly unique looking and sounding guitars. A blues mac
   and an absolute beast.
 Testimonial_it: Queste chitarre hanno un aspetto e un suono davvero unici. Una macchina
   da blues e una bestia assoluta.
-image: /assets/artists_joey-weidner.jpg
+videos:
+  - id: "SfE07YMGPLY"
+    title: "JW"
 ---

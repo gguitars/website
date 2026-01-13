@@ -15,12 +15,14 @@ Footer_en:
   Instagram: https://www.instagram.com/giungi_guitars/?hl=en
   Facebook: https://www.facebook.com/Giungiguitars/
   YouTube: https://www.youtube.com/@giungiguitars
+  Trustpilot: https://uk.trustpilot.com/review/giungiguitars.com?languages=all&utm_medium=trustbox&utm_source=MicroReviewCount
 Footer_it:
   Tagline: Ancona, Italia // Est. 2017
   Email: GiungiGuitars@gmail.com
   Instagram: https://www.instagram.com/giungi_guitars/?hl=en
   Facebook: https://www.facebook.com/Giungiguitars/
   YouTube: https://www.youtube.com/@giungiguitars
+  Trustpilot: https://uk.trustpilot.com/review/giungiguitars.com?languages=all&utm_medium=trustbox&utm_source=MicroReviewCount
 Social_en:
   Follow: Follow
   Instagram: https://www.instagram.com/giungi_guitars/?hl=en

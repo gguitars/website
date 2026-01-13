@@ -15,11 +15,11 @@ eleventyComputed:
     <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[70vh] border-b border-slate-200">
         <!-- Text Content -->
         <div class="lg:col-span-6 p-10 md:p-16 xl:p-24 flex flex-col justify-center relative bg-white">
-            <h1 class="heading-xl text-6xl md:text-8xl xl:text-[7rem] mb-6 uppercase leading-[0.85]">
+            <h1 class="heading-xl hero-main-title">
                 {% set hero = siteData.pages.home | localeField('Hero', locale) %}
                 {{ hero.Heading | default("Giungi Guitars") | safe }}
             </h1>
-            <p class="text-lg md:text-xl text-slate-500 mb-10 max-w-xl font-light leading-relaxed">
+            <p class="hero-tagline">
                 {{ hero.Tagline }}
             </p>
             
@@ -42,6 +42,9 @@ eleventyComputed:
                         {% endif %}
                         {% if footer.YouTube %}
                         <a href="{{ footer.YouTube }}" class="hover:text-slate-900 transition-colors"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+                        {% endif %}
+                        {% if footer.Trustpilot %}
+                        <a href="{{ footer.Trustpilot }}" target="_blank" class="hover:text-slate-900 transition-colors" title="Trustpilot"><i data-lucide="star" class="w-4 h-4"></i></a>
                         {% endif %}
                     </div>
                 </div>

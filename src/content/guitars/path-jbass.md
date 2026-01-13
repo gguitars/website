@@ -1,6 +1,7 @@
 ---
 title_en: PATH J Bass TRIBUTE
 title_it: PATH J Bass TRIBUTE
+order: 100
 Subtitle_en: The Low End Theory
 Subtitle_it: La Teoria delle Basse Frequenze
 Concept_en: >

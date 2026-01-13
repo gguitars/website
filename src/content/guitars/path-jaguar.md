@@ -1,7 +1,8 @@
 ---
 title_en: PATH Jazzmaster TRIBUTE
-title_it: PATH Jazzmaster TRIBUTE
-Subtitle_en: The Modern Offset
+title_it: PATH JAGUAR TRIBUTE
+order: 2
+Subtitle_en: The Outsider's Choice
 Subtitle_it: L'Offset Moderno
 Concept_en: >
   Reworked in a modern key of handcrafted authenticity, this Jaguar / Jazzmaster

@@ -1,6 +1,7 @@
 ---
 title_en: PATH LES PAUL TRIBUTE
 title_it: PATH LES PAUL TRIBUTE
+order: 1
 Subtitle_en: The Reason I Became A Luthier
 Subtitle_it: Il Motivo per Cui Sono Diventato Liutaio
 Concept_en: >
