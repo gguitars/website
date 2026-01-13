@@ -1,0 +1,113 @@
+---
+layout: base.njk
+page_id: contact
+pagination:
+  data: locales
+  size: 1
+  alias: locale
+locales: [en, it]
+permalink: "/{% if locale == 'it' %}it/{% endif %}contact/index.html"
+eleventyComputed:
+  title: "{{ siteData.pages.contact | localeField('title', locale) | default('Contact - Giungi Guitars') }}"
+---
+
+<main class="pt-24 pb-12 px-6 flex-1">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            {% set pageData = siteData.pages.contact | localeField('Hero', locale) %}
+            <span class="mono text-[10px] text-slate-400 tracking-[0.2em] mb-4 block uppercase">
+                {% if locale == 'it' %}Contatti{% else %}Contact{% endif %}
+            </span>
+            <h1 class="heading-xl text-5xl md:text-7xl uppercase mb-4" id="contact-title">
+                {% if locale == 'it' %}Mettiamoci in Contatto{% else %}Get in Touch{% endif %}
+            </h1>
+            <p class="text-slate-500 font-light max-w-lg mx-auto" id="contact-subtitle">
+                {{ pageData.Subtitle }}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div>
+                <section id="contact-info" class="mb-12">
+                    <h2 class="text-xs font-bold uppercase tracking-widest mb-6 border-b border-slate-100 pb-2">
+                        {% if locale == 'it' %}Dettagli Laboratorio{% else %}Workshop Details{% endif %}
+                    </h2>
+                    <div class="space-y-6">
+                        <p id="contact-address" class="text-sm">
+                            <strong class="mono text-[10px] text-slate-400 uppercase block mb-1">
+                                {% if locale == 'it' %}Indirizzo{% else %}Address{% endif %}
+                            </strong>
+                            via Gianbattista Pergolesi 28<br>Ancona, AN 60121, ITALY
+                        </p>
+                        <p id="contact-email" class="text-sm">
+                            <strong class="mono text-[10px] text-slate-400 uppercase block mb-1">Email</strong>
+                            <a href="mailto:giungi.guitars@gmail.com" class="text-slate-900 border-b border-slate-900/10 hover:border-slate-950 transition-all font-bold">giungi.guitars@gmail.com</a>
+                        </p>
+                        <p id="contact-phone" class="text-sm">
+                            <strong class="mono text-[10px] text-slate-400 uppercase block mb-1">
+                                {% if locale == 'it' %}Telefono{% else %}Phone{% endif %}
+                            </strong>
+                            +39 351 953 5989
+                        </p>
+                    </div>
+                    <h3 class="text-xs font-bold uppercase tracking-widest mt-10 mb-4 border-b border-slate-100 pb-2">
+                        {% if locale == 'it' %}Disponibilità{% else %}Availability{% endif %}
+                    </h3>
+                    <div class="space-y-4">
+                        <p id="contact-weekdays" class="text-sm">
+                            <strong class="mono text-[10px] text-slate-400 uppercase block mb-1">
+                                {% if locale == 'it' %}Lunedì - Venerdì{% else %}Monday - Friday{% endif %}
+                            </strong>
+                            09.30 - 12.30 / 14.30 - 18.00
+                        </p>
+                        <p id="contact-saturday" class="text-sm">
+                            <strong class="mono text-[10px] text-slate-400 uppercase block mb-1">
+                                {% if locale == 'it' %}Sabato{% else %}Saturday{% endif %}
+                            </strong>
+                            10.00 - 13.00
+                        </p>
+                    </div>
+                </section>
+    
+                <section id="social-media">
+                    <h2 class="text-xs font-bold uppercase tracking-widest mb-6 border-b border-slate-100 pb-2">Social</h2>
+                    <div class="flex items-center gap-6 mt-4 opacity-40 hover:opacity-100 transition-opacity">
+                        <a id="contact-social-instagram" href="https://www.instagram.com/giungi_guitars/?hl=en" class="text-slate-900 hover:text-slate-950 transition-colors" aria-label="Instagram"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                        <a id="contact-social-facebook" href="https://www.facebook.com/Giungiguitars/" class="text-slate-900 hover:text-slate-950 transition-colors" aria-label="Facebook"><i data-lucide="facebook" class="w-6 h-6"></i></a>
+                        <a id="contact-social-youtube" href="https://www.youtube.com/@giungiguitars" target="_blank" class="text-slate-900 hover:text-slate-950 transition-colors" aria-label="YouTube"><i data-lucide="youtube" class="w-6 h-6"></i></a>
+                    </div>
+                </section>
+            </div>
+
+            <div>
+                <section id="contact-form" class="bg-slate-50 p-6 md:p-10 border border-slate-200">
+                    <h2 class="text-xl font-black uppercase mb-8" id="contact-form-heading">
+                        {% if locale == 'it' %}Invia un Messaggio{% else %}Send a Message{% endif %}
+                    </h2>
+                    <form>
+                        <div class="form-group mb-4">
+                            <label for="name" class="block mb-1 text-sm font-bold text-slate-700">
+                                {% if locale == 'it' %}Nome{% else %}Name{% endif %}:
+                            </label>
+                            <input type="text" id="name" name="name" class="w-full p-3 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="email" class="block mb-1 text-sm font-bold text-slate-700">Email:</label>
+                            <input type="email" id="email" name="email" class="w-full p-3 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="form-group mb-6">
+                            <label for="message" class="block mb-1 text-sm font-bold text-slate-700">
+                                {% if locale == 'it' %}Messaggio{% else %}Message{% endif %}:
+                            </label>
+                            <textarea id="message" name="message" rows="5" class="w-full p-3 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full" id="contact-form-submit">
+                            {% if locale == 'it' %}Invia Messaggio{% else %}Send Message{% endif %} 
+                            <i data-lucide="send" class="ml-2 w-4 h-4"></i>
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</main>

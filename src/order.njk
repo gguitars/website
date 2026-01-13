@@ -1,0 +1,85 @@
+---
+layout: base.njk
+page_id: order
+pagination:
+  data: locales
+  size: 1
+  alias: locale
+locales: [en, it]
+permalink: "/{% if locale == 'it' %}it/{% endif %}order/index.html"
+eleventyComputed:
+  title: "{{ siteData.pages.order | localeField('title', locale) | default('Start Your Build - Giungi Guitars') }}"
+---
+
+<main class="pt-24 pb-24 w-full flex-1">
+    <div class="max-w-4xl mx-auto px-6">
+        
+        <div class="mb-16 border-b border-slate-200 pb-12">
+            {% set hero = siteData.pages.order | localeField('Hero', locale) %}
+            <div class="mono text-xs text-slate-400 mb-6 flex items-center">
+                <span class="w-8 h-px bg-slate-200 mr-4"></span>
+                <span id="order-hero-tagline">{{ hero.Tagline }}</span>
+            </div>
+            <h1 class="heading-xl text-5xl md:text-7xl uppercase mb-6" id="order-hero-heading">
+                {{ hero.Heading | safe }}
+            </h1>
+            <div class="prose prose-lg text-slate-600">
+                <p id="order-hero-intro">
+                    {{ hero.Intro }}
+                </p>
+            </div>
+        </div>
+
+        {% set sections = siteData.pages.order | localeField('Sections', locale) %}
+        <form action="#" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+            
+            <div class="md:col-span-2">
+                <h3 class="serif text-3xl italic mb-6" id="order-section-musician-profile">{{ sections.Profile }}</h3>
+            </div>
+
+            <div>
+                <label for="name">{% if locale == 'it' %}Nome Completo{% else %}Full Name{% endif %}</label>
+                <input type="text" id="name" name="name" required placeholder="E.G. JOHN DOE">
+            </div>
+
+            <div>
+                <label for="email">{% if locale == 'it' %}Indirizzo Email{% else %}Email Address{% endif %}</label>
+                <input type="email" id="email" name="email" required placeholder="JOHN@EXAMPLE.COM">
+            </div>
+
+            <div class="md:col-span-2 mt-8">
+                <h3 class="serif text-3xl italic mb-6" id="order-section-technical-specs">{{ sections.Specs }}</h3>
+            </div>
+
+            <div class="md:col-span-2">
+                <label for="guitar_model">{% if locale == 'it' %}Modello di Base{% else %}Base Model{% endif %}</label>
+                <div class="relative">
+                    <select id="guitar_model" name="guitar_model" class="appearance-none cursor-pointer uppercase">
+                        <option value="" disabled selected>{% if locale == 'it' %}Seleziona un modello...{% else %}Select a model...{% endif %}</option>
+                        <option value="path_les_paul">PATH Les Paul Tribute</option>
+                        <option value="path_jaguar">PATH Jaguar / JM Tribute</option>
+                        <option value="path_sg">PATH SG Tribute</option>
+                        <option value="path_jbass">PATH J Bass</option>
+                        <option value="other">{% if locale == 'it' %}Altro / Forma Custom{% else %}Other / Custom Shape{% endif %}</option>
+                    </select>
+                    <i data-lucide="chevron-down" class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
+                </div>
+            </div>
+
+            <div class="md:col-span-2">
+                <label for="customization">{% if locale == 'it' %}Dettagli Personalizzazione{% else %}Customization Details{% endif %}</label>
+                <textarea id="customization" name="customization" rows="6" 
+                placeholder="{% if locale == 'it' %}Descrivi la tua visione: Legni, pickup, finitura, preferenze hardware o obiettivi tonali specifici...{% else %}Describe your vision: Woods, pickups, finish, hardware preference, or specific tone goals...{% endif %}"></textarea>
+                <p class="text-xs text-slate-400 mt-2 text-right mono" id="order-helper-text">{{ sections.Helper }}</p>
+            </div>
+
+            <div class="md:col-span-2 mt-8 pt-8 border-t border-slate-200 flex justify-end">
+                <button type="submit" class="btn-primary w-full md:w-auto" id="order-submit">
+                    {% if locale == 'it' %}Invia Richiesta{% else %}Submit Request{% endif %} 
+                    <i data-lucide="arrow-right" class="ml-3 w-4 h-4"></i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</main>

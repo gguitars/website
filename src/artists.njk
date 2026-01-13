@@ -1,0 +1,109 @@
+---
+layout: base.njk
+page_id: artists
+pagination:
+  data: locales
+  size: 1
+  alias: locale
+locales: [en, it]
+permalink: "/{% if locale == 'it' %}it/{% endif %}artists/index.html"
+eleventyComputed:
+  title: "{{ siteData.pages.artists | localeField('title', locale) | default('Artists - Giungi Guitars') }}"
+---
+
+<main class="pt-24 pb-24 px-6 max-w-7xl mx-auto w-full">
+    
+    <header class="mb-16 border-b border-slate-100 pb-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+            <div>
+                <span class="mono text-[10px] text-slate-400 tracking-[0.2em] mb-4 block uppercase">
+                    {% if locale == 'it' %}Roster{% else %}Roster{% endif %}
+                </span>
+                <h1 class="heading-xl text-5xl md:text-7xl uppercase mb-0 leading-[0.9]">
+                    {% if locale == 'it' %}I Nostri <br> Artisti{% else %}Our <br> Artists{% endif %}
+                </h1>
+            </div>
+            <div>
+                {% set pageHero = siteData.pages.artists | localeField('Hero', locale) %}
+                <p class="text-base text-slate-500 leading-relaxed max-w-sm font-light">
+                    {{ pageHero.Intro }}
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
+
+        {% for artist in collections.artists %}
+        <article class="group flex flex-col" data-artist="{{ artist.fileSlug }}">
+            <div class="bg-slate-950 border border-slate-200 overflow-hidden mb-8 relative">
+                <!-- Fallback to image -->
+                <div class="aspect-[4/3] flex items-center justify-center">
+                    <img src="{{ artist.data.image | default('/assets/placeholder.webp') }}" 
+                         alt="{{ artist.data | localeField('title', locale) }}" 
+                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 contrast-110">
+                </div>
+                
+                <div class="absolute bottom-0 left-0 bg-white border-t border-r border-slate-200 p-2">
+                    <div class="mono text-[10px] uppercase tracking-widest" data-field="location">
+                        {{ artist.data | localeField('Location', locale) }}
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="flex flex-wrap justify-between items-baseline border-b border-slate-200 pb-4 mb-6">
+                    <h2 class="text-3xl font-black uppercase" data-field="name">
+                        {{ artist.data | localeField('title', locale) }}
+                    </h2>
+                    <span class="mono text-xs text-slate-500 uppercase mt-2 md:mt-0" data-field="role">
+                        {{ artist.data | localeField('Role', locale) }}
+                    </span>
+                </div>
+
+                <div class="mb-6">
+                    {% set testimonial = artist.data | localeField('Testimonial', locale) %}
+                    {% if testimonial %}
+                    <div class="p-6 bg-slate-50 border-l-4 border-slate-900 italic text-slate-700 mb-6" data-field="quote">
+                        "{{ testimonial }}"
+                    </div>
+                    {% endif %}
+                    
+                    <div class="prose prose-sm text-slate-600 leading-relaxed mb-6">
+                        <div class="mb-4" data-field="biography">
+                            <strong class="text-slate-950 uppercase text-xs tracking-wider block mb-2">
+                                {% if locale == 'it' %}Biografia{% else %}Biography{% endif %}
+                            </strong>
+                            {{ artist.data | localeField('Biography', locale) | safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+
+        {% set action = siteData.pages.artists | localeField('Action', locale) %}
+        <article class="lg:col-span-2 border-t border-slate-200 pt-16 mt-8" id="artists-work-with-us">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <div class="mono text-xs text-slate-400 mb-2 flex items-center">
+                        <span class="w-8 h-px bg-slate-200 mr-4"></span>
+                        <span id="artists-work-label">{{ action.Label }}</span>
+                    </div>
+                    <h2 class="text-4xl font-black uppercase mb-4" id="artists-work-heading">{{ action.Heading }}</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6" id="artists-work-body">
+                        {{ action.Body }}
+                    </p>
+                    <a href="/{% if locale == 'it' %}it/{% endif %}contact/" class="btn-primary" id="artists-work-cta">
+                        {% if locale == 'it' %}Contattaci{% else %}Contact Us{% endif %}
+                    </a>
+                </div>
+                <div class="flex justify-center md:justify-end opacity-20">
+                    <i data-lucide="mic-2" class="w-48 h-48 text-slate-950"></i>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+</main>

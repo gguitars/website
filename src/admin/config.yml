@@ -1,0 +1,338 @@
+backend:
+  name: github
+  repo: giungiguitars/new_website
+  branch: main
+  base_url: https://api.netlify.com
+
+local_backend: true
+
+media_folder: "src/assets"
+public_folder: "/assets"
+max_file_size: 512000000
+
+collections:
+  - name: "guitars"
+    label: "Guitars (EN/IT)"
+    folder: "src/content/guitars"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - {label: "Name (English)", name: "title_en", widget: "string"}
+      - {label: "Nome (Italiano)", name: "title_it", widget: "string"}
+      - {label: "Subtitle (English)", name: "Subtitle_en", widget: "string"}
+      - {label: "Sottotitolo (Italiano)", name: "Subtitle_it", widget: "string"}
+      - {label: "Concept (English)", name: "Concept_en", widget: "markdown"}
+      - {label: "Concetto (Italiano)", name: "Concept_it", widget: "markdown"}
+      - label: "Technical Specifications (English)"
+        name: "Customization_en"
+        widget: "list"
+        fields:
+          - {label: "Property", name: "key", widget: "string"}
+          - {label: "Value", name: "value", widget: "string"}
+      - label: "Specifiche Tecniche (Italiano)"
+        name: "Customization_it"
+        widget: "list"
+        fields:
+          - {label: "Proprietà", name: "key", widget: "string"}
+          - {label: "Valore", name: "value", widget: "string"}
+      - {label: "Price (English)", name: "Price_en", widget: "string"}
+      - {label: "Prezzo (Italiano)", name: "Price_it", widget: "string"}
+      - {label: "History (English)", name: "History_en", widget: "markdown"}
+      - {label: "Storia (Italiano)", name: "History_it", widget: "markdown"}
+      - label: "Gallery Images"
+        name: "images"
+        widget: "list"
+        summary: "{{fields.image}}"
+        field: {label: "Image", name: "image", widget: "image"}
+
+  - name: "artists"
+    label: "Artists (EN/IT)"
+    folder: "src/content/artists"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - {label: "Name (English)", name: "title_en", widget: "string"}
+      - {label: "Nome (Italiano)", name: "title_it", widget: "string"}
+      - {label: "Role (English)", name: "Role_en", widget: "string"}
+      - {label: "Ruolo (Italiano)", name: "Role_it", widget: "string"}
+      - {label: "Location (English)", name: "Location_en", widget: "string"}
+      - {label: "Luogo (Italiano)", name: "Location_it", widget: "string"}
+      - {label: "Testimonial (English)", name: "Testimonial_en", widget: "text"}
+      - {label: "Testimonianza (Italiano)", name: "Testimonial_it", widget: "text"}
+      - {label: "Biography (English)", name: "Biography_en", widget: "markdown"}
+      - {label: "Biografia (Italiano)", name: "Biography_it", widget: "markdown"}
+      - {label: "Profile Image", name: "image", widget: "image"}
+
+  - name: "pages"
+    label: "Pages (EN/IT)"
+    files:
+      - file: "src/content/pages/home.md"
+        label: "Home Page"
+        name: "home"
+        fields:
+          - {label: "Title (English)", name: "title_en", widget: "string"}
+          - {label: "Titolo (Italiano)", name: "title_it", widget: "string"}
+          - label: "Hero (English)"
+            name: "Hero_en"
+            widget: "object"
+            fields:
+              - {label: "Heading", name: "Heading", widget: "string"}
+              - {label: "Tagline", name: "Tagline", widget: "string"}
+              - {label: "PrimaryCtaLabel", name: "PrimaryCtaLabel", widget: "string"}
+          - label: "Hero (Italiano)"
+            name: "Hero_it"
+            widget: "object"
+            fields:
+              - {label: "Heading", name: "Heading", widget: "string"}
+              - {label: "Tagline", name: "Tagline", widget: "string"}
+              - {label: "PrimaryCtaLabel", name: "PrimaryCtaLabel", widget: "string"}
+          - label: "Story (English)"
+            name: "Story_en"
+            widget: "object"
+            fields:
+              - {label: "Intro", name: "Intro", widget: "text"}
+              - {label: "Body1", name: "Body1", widget: "text"}
+              - {label: "Body2", name: "Body2", widget: "text"}
+          - label: "Story (Italiano)"
+            name: "Story_it"
+            widget: "object"
+            fields:
+              - {label: "Intro", name: "Intro", widget: "text"}
+              - {label: "Body1", name: "Body1", widget: "text"}
+              - {label: "Body2", name: "Body2", widget: "text"}
+          - label: "Badges (English)"
+            name: "Badges_en"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "Title", widget: "string"}
+              - {label: "Icon", name: "Icon", widget: "string"}
+              - {label: "Description", name: "Description", widget: "text"}
+          - label: "Badges (Italiano)"
+            name: "Badges_it"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "Title", widget: "string"}
+              - {label: "Icon", name: "Icon", widget: "string"}
+              - {label: "Description", name: "Description", widget: "text"}
+          - label: "Quality (English)"
+            name: "Quality_en"
+            widget: "object"
+            fields:
+              - {label: "Heading", name: "Heading", widget: "string"}
+              - {label: "Quote", name: "Quote", widget: "text"}
+          - label: "Quality (Italiano)"
+            name: "Quality_it"
+            widget: "object"
+            fields:
+              - {label: "Heading", name: "Heading", widget: "string"}
+              - {label: "Quote", name: "Quote", widget: "text"}
+          - label: "Testimonials (English)"
+            name: "Testimonials_en"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "Name", widget: "string"}
+              - {label: "Location", name: "Location", widget: "string"}
+              - {label: "Image", name: "Image", widget: "image"}
+              - {label: "Quote", name: "Quote", widget: "text"}
+          - label: "Testimonials (Italiano)"
+            name: "Testimonials_it"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "Name", widget: "string"}
+              - {label: "Location", name: "Location", widget: "string"}
+              - {label: "Image", name: "Image", widget: "image"}
+              - {label: "Quote", name: "Quote", widget: "text"}
+          - label: "Social (English)"
+            name: "Social_en"
+            widget: "list"
+            fields:
+              - {label: "Channel", name: "Channel", widget: "string"}
+              - {label: "Label", name: "Label", widget: "string"}
+              - {label: "Url", name: "Url", widget: "string"}
+          - label: "Social (Italiano)"
+            name: "Social_it"
+            widget: "list"
+            fields:
+              - {label: "Channel", name: "Channel", widget: "string"}
+              - {label: "Label", name: "Label", widget: "string"}
+              - {label: "Url", name: "Url", widget: "string"}
+
+      - file: "src/content/pages/guitars.md"
+        label: "Collection Page Blurbs"
+        name: "guitars"
+        fields:
+          - {label: "Title (English)", name: "title_en", widget: "string"}
+          - {label: "Titolo (Italiano)", name: "title_it", widget: "string"}
+          - label: "Hero (English)"
+            name: "Hero_en"
+            widget: "object"
+            fields:
+              - {label: "Quote", name: "Quote", widget: "text"}
+              - {label: "Author", name: "Author", widget: "string"}
+          - label: "Hero (Italiano)"
+            name: "Hero_it"
+            widget: "object"
+            fields:
+              - {label: "Quote", name: "Quote", widget: "text"}
+              - {label: "Author", name: "Author", widget: "string"}
+
+      - file: "src/content/pages/artists.md"
+        label: "Artists Page Blurbs"
+        name: "artists_page"
+        fields:
+          - {label: "Title (English)", name: "title_en", widget: "string"}
+          - {label: "Titolo (Italiano)", name: "title_it", widget: "string"}
+          - label: "Hero (English)"
+            name: "Hero_en"
+            widget: "object"
+            fields:
+              - {label: "Intro", name: "Intro", widget: "text"}
+          - label: "Hero (Italiano)"
+            name: "Hero_it"
+            widget: "object"
+            fields:
+              - {label: "Intro", name: "Intro", widget: "text"}
+          - label: "Action (English)"
+            name: "Action_en"
+            widget: "object"
+            fields:
+              - {label: "Label", name: "Label", widget: "string"}
+              - {label: "Heading", name: "Heading", widget: "string"}
+              - {label: "Body", name: "Body", widget: "text"}
+          - label: "Action (Italiano)"
+            name: "Action_it"
+            widget: "object"
+            fields:
+              - {label: "Label", name: "Label", widget: "string"}
+              - {label: "Heading", name: "Heading", widget: "string"}
+              - {label: "Body", name: "Body", widget: "text"}
+
+      - file: "src/content/pages/order.md"
+        label: "Order Page Blurbs"
+        name: "order"
+        fields:
+          - {label: "Title (English)", name: "title_en", widget: "string"}
+          - {label: "Titolo (Italiano)", name: "title_it", widget: "string"}
+          - label: "Hero (English)"
+            name: "Hero_en"
+            widget: "object"
+            fields:
+              - {label: "Tagline", name: "Tagline", widget: "string"}
+              - {label: "Heading", name: "Heading", widget: "string"}
+              - {label: "Intro", name: "Intro", widget: "text"}
+          - label: "Hero (Italiano)"
+            name: "Hero_it"
+            widget: "object"
+            fields:
+              - {label: "Tagline", name: "Tagline", widget: "string"}
+              - {label: "Heading", name: "Heading", widget: "string"}
+              - {label: "Intro", name: "Intro", widget: "text"}
+          - label: "Sections (English)"
+            name: "Sections_en"
+            widget: "object"
+            fields:
+              - {label: "Profile Heading", name: "Profile", widget: "string"}
+              - {label: "Specs Heading", name: "Specs", widget: "string"}
+              - {label: "Helper Text", name: "Helper", widget: "string"}
+          - label: "Sections (Italiano)"
+            name: "Sections_it"
+            widget: "object"
+            fields:
+              - {label: "Profile Heading", name: "Profile", widget: "string"}
+              - {label: "Specs Heading", name: "Specs", widget: "string"}
+              - {label: "Helper Text", name: "Helper", widget: "string"}
+
+      - file: "src/content/pages/press.md"
+        label: "Press Page Blurbs"
+        name: "press"
+        fields:
+          - {label: "Title (English)", name: "title_en", widget: "string"}
+          - {label: "Titolo (Italiano)", name: "title_it", widget: "string"}
+          - label: "Hero (English)"
+            name: "Hero_en"
+            widget: "object"
+            fields:
+              - {label: "Intro", name: "Intro", widget: "text"}
+          - label: "Hero (Italiano)"
+            name: "Hero_it"
+            widget: "object"
+            fields:
+              - {label: "Intro", name: "Intro", widget: "text"}
+          - label: "Press Items (English)"
+            name: "Items_en"
+            widget: "list"
+            fields:
+              - {label: "Outlet Name", name: "Outlet", widget: "string"}
+              - {label: "Logo", name: "Logo", widget: "image"}
+              - {label: "Article Title", name: "Title", widget: "string"}
+              - {label: "Summary", name: "Summary", widget: "text"}
+              - {label: "Clipping Image", name: "Image", widget: "image"}
+              - {label: "Url", name: "Url", widget: "string"}
+          - label: "Press Items (Italiano)"
+            name: "Items_it"
+            widget: "list"
+            fields:
+              - {label: "Nome Testata", name: "Outlet", widget: "string"}
+              - {label: "Logo", name: "Logo", widget: "image"}
+              - {label: "Titolo Articolo", name: "Title", widget: "string"}
+              - {label: "Riassunto", name: "Summary", widget: "text"}
+              - {label: "Immagine Clipping", name: "Image", widget: "image"}
+              - {label: "Url", name: "Url", widget: "string"}
+
+      - file: "src/content/pages/contact.md"
+        label: "Contact Page Blurbs"
+        name: "contact"
+        fields:
+          - {label: "Title (English)", name: "title_en", widget: "string"}
+          - {label: "Titolo (Italiano)", name: "title_it", widget: "string"}
+          - label: "Hero (English)"
+            name: "Hero_en"
+            widget: "object"
+            fields:
+              - {label: "Subtitle", name: "Subtitle", widget: "string"}
+          - label: "Hero (Italiano)"
+            name: "Hero_it"
+            widget: "object"
+            fields:
+              - {label: "Subtitle", name: "Subtitle", widget: "string"}
+
+      - file: "src/content/pages/global.md"
+        label: "Global Site Settings"
+        name: "global"
+        fields:
+          - {label: "Title (English)", name: "title_en", widget: "string"}
+          - {label: "Titolo (Italiano)", name: "title_it", widget: "string"}
+          - label: "Navigation (English)"
+            name: "Navigation_en"
+            widget: "object"
+            fields:
+              - {label: "Brand", name: "Brand", widget: "string"}
+              - {label: "Brand Logo", name: "BrandLogo", widget: "image"}
+              - {label: "Version", name: "Version", widget: "string"}
+          - label: "Navigation (Italiano)"
+            name: "Navigation_it"
+            widget: "object"
+            fields:
+              - {label: "Brand", name: "Brand", widget: "string"}
+              - {label: "Logo Brand", name: "BrandLogo", widget: "image"}
+              - {label: "Version", name: "Version", widget: "string"}
+          - label: "Footer (English)"
+            name: "Footer_en"
+            widget: "object"
+            fields:
+              - {label: "Tagline", name: "Tagline", widget: "string"}
+              - {label: "Email", name: "Email", widget: "string"}
+              - {label: "Instagram", name: "Instagram", widget: "string"}
+              - {label: "Facebook", name: "Facebook", widget: "string"}
+              - {label: "YouTube", name: "YouTube", widget: "string"}
+          - label: "Footer (Italiano)"
+            name: "Footer_it"
+            widget: "object"
+            fields:
+              - {label: "Tagline", name: "Tagline", widget: "string"}
+              - {label: "Email", name: "Email", widget: "string"}
+              - {label: "Instagram", name: "Instagram", widget: "string"}
+              - {label: "Facebook", name: "Facebook", widget: "string"}
+              - {label: "YouTube", name: "YouTube", widget: "string"}

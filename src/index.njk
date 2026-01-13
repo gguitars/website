@@ -1,0 +1,216 @@
+---
+layout: base.njk
+page_id: home
+pagination:
+  data: locales
+  size: 1
+  alias: locale
+locales: [en, it]
+permalink: "/{% if locale == 'it' %}it/{% endif %}index.html"
+eleventyComputed:
+  title: "{{ siteData.pages.home | localeField('title', locale) }}"
+---
+
+<header class="relative min-h-screen pt-16 flex flex-col">
+    <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[70vh] border-b border-slate-200">
+        <!-- Text Content -->
+        <div class="lg:col-span-6 p-10 md:p-16 xl:p-24 flex flex-col justify-center relative bg-white">
+            <h1 class="heading-xl text-6xl md:text-8xl xl:text-[7rem] mb-6 uppercase leading-[0.85]">
+                {% set hero = siteData.pages.home | localeField('Hero', locale) %}
+                {{ hero.Heading | default("Giungi Guitars") | safe }}
+            </h1>
+            <p class="text-lg md:text-xl text-slate-500 mb-10 max-w-xl font-light leading-relaxed">
+                {{ hero.Tagline }}
+            </p>
+            
+            <div class="flex flex-wrap items-center gap-6">
+                <a href="/{% if locale == 'it' %}it/{% endif %}guitars/" class="btn-primary">
+                    {{ hero.PrimaryCtaLabel | default("Explore Designs") }}
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                </a>
+                <div class="flex items-center gap-4 text-slate-400">
+                    <span class="mono text-[10px] tracking-widest uppercase">
+                        {% if locale == 'it' %}Seguimi{% else %}Follow{% endif %}
+                    </span>
+                    <div class="flex gap-3">
+                        {% set footer = siteData.pages.global | localeField('Footer', locale) %}
+                        {% if footer.Instagram %}
+                        <a href="{{ footer.Instagram }}" class="hover:text-slate-900 transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                        {% endif %}
+                        {% if footer.Facebook %}
+                        <a href="{{ footer.Facebook }}" class="hover:text-slate-900 transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                        {% endif %}
+                        {% if footer.YouTube %}
+                        <a href="{{ footer.YouTube }}" class="hover:text-slate-900 transition-colors"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-6 bg-slate-50 flex flex-col border-b lg:border-b-0 border-slate-200 relative overflow-hidden group">
+            <div class="absolute inset-0 grid-bg opacity-50"></div>
+            
+            <button onclick="navGallery('hero', -1)" class="absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/80 border border-slate-200 rounded-full flex items-center justify-center text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-950 hover:text-white shadow-md">
+                <i data-lucide="chevron-left" class="w-8 h-8"></i>
+            </button>
+            
+            <div class="flex-1 flex items-center justify-center relative z-10 p-8 md:p-16">
+                <div class="text-center w-full">
+                    <div class="bg-white border border-slate-200 shadow-2xl rotate-2 transition-transform hover:rotate-0 duration-500">
+                        <img id="img-main-hero" src="{{ siteData.galleries.hero[0] }}" alt="Hero Guitar" class="w-full h-auto transition-opacity duration-300">
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="navGallery('hero', 1)" class="absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/80 border border-slate-200 rounded-full flex items-center justify-center text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-950 hover:text-white shadow-md">
+                <i data-lucide="chevron-right" class="w-8 h-8"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<section class="py-16 md:py-24 border-b border-slate-200 overflow-hidden">
+    <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <div class="lg:col-span-6">
+            {% set story = siteData.pages.home | localeField('Story', locale) %}
+            <span class="mono text-[10px] text-slate-400 tracking-[0.2em] mb-4 block uppercase">
+                {% if locale == 'it' %}La mia storia{% else %}My Story{% endif %}
+            </span>
+            <h2 class="heading-xl text-5xl md:text-7xl mb-8 uppercase leading-[0.9]">
+                {% if locale == 'it' %}Artigianato e Passione{% else %}Craft and Passion{% endif %}
+            </h2>
+            <div class="prose prose-lg text-slate-600 leading-relaxed font-light">
+                <p id="home-story-intro" class="mb-8 font-medium text-slate-950">
+                    {{ story.Intro }}
+                </p>
+                
+                <p id="home-story-body1" class="mb-6">
+                    {{ story.Body1 }}
+                </p>
+                <p id="home-story-body2">
+                    {{ story.Body2 }}
+                </p>
+            </div>
+        </div>
+        
+        <div class="lg:col-span-6">
+            <div class="prod-card h-full bg-slate-50 p-4 md:p-8 flex items-center justify-center border-dashed relative group">
+                <button onclick="navGallery('workshop', -1)" class="absolute left-4 z-20 w-10 h-10 bg-white/80 border border-slate-200 rounded-full flex items-center justify-center text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-950 hover:text-white shadow-md">
+                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+
+                <div id="media-container-workshop" class="w-full h-full flex items-center justify-center">
+                    <img id="img-main-workshop" src="{{ siteData.galleries.workshop[0] }}" alt="Workshop" class="shadow-2xl transform -rotate-2 max-w-full h-auto object-contain transition-opacity duration-300">
+                </div>
+
+                <button onclick="navGallery('workshop', 1)" class="absolute right-4 z-20 w-10 h-10 bg-white/80 border border-slate-200 rounded-full flex items-center justify-center text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-950 hover:text-white shadow-md">
+                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-16 md:py-24 border-b border-slate-200 bg-slate-50/50">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+            <span class="mono text-[10px] text-slate-400 tracking-[0.2em] mb-4 block uppercase">
+                {% if locale == 'it' %}Costruite per l'eccellenza{% else %}Built for Excellence{% endif %}
+            </span>
+            <h2 class="heading-xl text-4xl md:text-6xl uppercase">
+                {% if locale == 'it' %}Qualità Artigianale{% else %}Handcrafted Quality{% endif %}
+            </h2>
+        </div>
+        <div class="text-center mb-24">
+            {% set quality = siteData.pages.home | localeField('Quality', locale) %}
+            <p id="home-quality-quote" class="text-xl text-slate-600 font-medium max-w-2xl mx-auto">
+                {{ quality.Quote }}
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 px-6 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
+            {% set badges = siteData.pages.home | localeField('Badges', locale) %}
+            {% for badge in badges %}
+            <div class="flex flex-col items-center">
+                <div class="mb-8 p-6 bg-slate-50 rounded-full border border-slate-100 flex items-center justify-center text-slate-900 shadow-sm border-dashed">
+                    <i data-lucide="{{ badge.Icon | default('shield') }}" class="w-10 h-10"></i>
+                </div>
+                <h3 class="heading-sm text-2xl uppercase mb-4">{{ badge.Title }}</h3>
+                <p class="text-slate-600 text-sm leading-relaxed max-w-[280px]">
+                    {{ badge.Description }}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="bg-slate-950 text-slate-300 py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex items-end justify-between mb-12 border-b border-slate-800 pb-4">
+            <div>
+                <h2 class="text-white text-3xl font-black uppercase">
+                    {% if locale == 'it' %}Testimonianze{% else %}Testimonials{% endif %}
+                </h2>
+                <p class="mono text-xs text-slate-500 mt-2">
+                    {% if locale == 'it' %}COSA DICONO GLI ARTISTI{% else %}WHAT ARTISTS SAY{% endif %}
+                </p>
+            </div>
+            <div class="hidden md:block">
+                <i data-lucide="quote" class="text-slate-600 w-6 h-6"></i>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% set testimonials = siteData.pages.home | localeField('Testimonials', locale) %}
+            {% for testimonial in testimonials %}
+            <div class="bg-slate-900 border border-slate-800 p-8 relative">
+                <div class="flex items-center gap-4 mb-6">
+                    <img src="{{ testimonial.Image | default('/assets/placeholder.webp') }}" alt="{{ testimonial.Name }}" class="rounded-full border border-slate-700 w-12 h-12">
+                    <div>
+                        <h4 class="font-bold text-white uppercase text-sm">{{ testimonial.Name }}</h4>
+                        <span class="mono text-[10px] text-slate-500">{{ testimonial.Location }}</span>
+                    </div>
+                </div>
+                <p class="text-sm leading-relaxed italic opacity-80">
+                    {{ testimonial.Quote }}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+    const galleryState = {
+        'hero': {
+            index: 0,
+            images: {{ siteData.galleries.hero | dump | safe }}
+        },
+        'workshop': {
+            index: 0,
+            images: {{ siteData.galleries.workshop | dump | safe }}
+        }
+    };
+
+    function navGallery(id, direction) {
+        const state = galleryState[id];
+        if (!state || !state.images.length) return;
+        
+        state.index = (state.index + direction + state.images.length) % state.images.length;
+        const mainImg = document.getElementById('img-main-' + id);
+        if (!mainImg) return;
+
+        mainImg.style.opacity = '0.4';
+        setTimeout(() => {
+            mainImg.src = state.images[state.index];
+            mainImg.style.opacity = '1';
+        }, 200);
+    }
+</script>

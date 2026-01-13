@@ -1,0 +1,259 @@
+---
+layout: base.njk
+page_id: guitars
+pagination:
+  data: locales
+  size: 1
+  alias: locale
+locales: [en, it]
+permalink: "/{% if locale == 'it' %}it/{% endif %}guitars/index.html"
+eleventyComputed:
+  title: "{{ siteData.pages.guitars | localeField('title', locale) | default('The Collection - Giungi Guitars') }}"
+---
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Manrope:wght@300;400;700;800&display=swap');
+
+    body { font-family: 'Manrope', sans-serif; }
+    .mono { font-family: 'IBM Plex Mono', monospace; }
+
+    .model-panel {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+    .model-panel.active {
+        display: grid;
+        opacity: 1;
+    }
+    
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+    .custom-scroll::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 3px; }
+    .custom-scroll::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
+
+    .nav-item.active {
+        background-color: #f8fafc;
+        border-right: 3px solid #0f172a;
+    }
+    .nav-item.active .model-name { color: #0f172a; }
+    
+    .spec-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    .spec-row:last-child { border-bottom: none; }
+</style>
+
+<main class="pt-16 min-h-screen flex flex-col lg:flex-row h-screen overflow-hidden">
+    
+    <aside class="w-full lg:w-80 bg-white border-b lg:border-b-0 lg:border-r border-slate-200 lg:h-full flex flex-col z-20 shadow-lg lg:shadow-none">
+        
+        <div class="p-8 pb-4">
+            <h2 class="mono text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                <i data-lucide="grid" class="w-3 h-3"></i> 
+                {% if locale == 'it' %}La Collezione{% else %}The Collection{% endif %}
+            </h2>
+        </div>
+
+        <div class="flex-1 overflow-y-auto custom-scroll flex lg:flex-col overflow-x-auto lg:overflow-visible no-scrollbar">
+            {% for guitar in collections.guitars %}
+            <button onclick="switchModel('{{ guitar.data.slug }}')" id="btn-{{ guitar.data.slug }}" 
+                    class="nav-item {% if loop.first %}active{% endif %} flex-shrink-0 text-left px-8 py-6 border-b border-slate-100 hover:bg-slate-50 transition-all group w-64 lg:w-full">
+                <span class="mono text-[9px] text-slate-400 mb-1 block tracking-widest">{{ guitar.data.Series | default("Path") }}</span>
+                <span class="model-name text-lg font-black uppercase text-slate-300 group-hover:text-slate-800 transition-colors">
+                    {{ guitar.data | localeField('title', locale) }}
+                </span>
+            </button>
+            {% endfor %}
+        </div>
+
+        <div class="p-8 bg-slate-50 border-t border-slate-200 hidden lg:block">
+            <i data-lucide="quote" class="w-6 h-6 text-slate-300 mb-4"></i>
+            {% set pageData = siteData.pages.guitars | localeField('Hero', locale) %}
+            <p class="text-sm text-slate-600 italic leading-relaxed mb-4">
+                {{ pageData.Quote }}
+            </p>
+            <div class="mono text-xs font-bold text-slate-950 uppercase">{{ pageData.Author }}</div>
+        </div>
+    </aside>
+
+    <div class="flex-1 relative bg-white h-full overflow-hidden">
+        
+        {% for guitar in collections.guitars %}
+        <article id="model-{{ guitar.data.slug }}" class="model-panel {% if loop.first %}active{% endif %} grid-cols-1 xl:grid-cols-2 h-full overflow-y-auto xl:overflow-hidden">
+            <div class="bg-slate-50 p-6 md:p-8 flex flex-col justify-center border-b xl:border-b-0 xl:border-r border-slate-200 h-full relative">
+                <div class="absolute top-6 left-6 z-10">
+                    <span class="px-2 py-1 bg-white border border-slate-200 text-[10px] font-bold uppercase tracking-wider rounded-sm shadow-sm">
+                        {{ guitar.data.Construction | default("Solid Body") }}
+                    </span>
+                </div>
+                
+                <div class="relative w-full h-full max-h-[600px] flex items-center justify-center p-4 group">
+                    {% if guitar.data.images.length > 0 %}
+                    <button onclick="navGallery('{{ guitar.data.slug }}', -1)" class="absolute left-4 z-20 w-10 h-10 bg-white/80 border border-slate-200 rounded-full flex items-center justify-center text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-950 hover:text-white shadow-sm">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    
+                    <img id="img-main-{{ guitar.data.slug }}" src="{{ guitar.data.images[0] }}" class="max-h-full max-w-full object-contain mix-blend-multiply transition-opacity duration-300">
+                    
+                    <button onclick="navGallery('{{ guitar.data.slug }}', 1)" class="absolute right-4 z-20 w-10 h-10 bg-white/80 border border-slate-200 rounded-full flex items-center justify-center text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-950 hover:text-white shadow-sm">
+                        <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                    </button>
+                    {% else %}
+                    <div class="text-center p-12">
+                        <i data-lucide="camera" class="w-12 h-12 text-slate-200 mx-auto mb-4"></i>
+                        <p class="mono text-[10px] text-slate-400 uppercase tracking-widest">
+                            {% if locale == 'it' %}Galleria in Arrivo{% else %}Gallery Coming Soon{% endif %}
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                {% if guitar.data.images.length > 0 %}
+                <div class="flex flex-wrap justify-center gap-2 mt-8 px-4">
+                    {% for img in guitar.data.images %}
+                    <button onclick="changeImage('{{ guitar.data.slug }}', '{{ img }}')" 
+                            class="thumb-nav w-12 h-12 md:w-16 md:h-16 border-2 transition-all p-1 bg-white {% if loop.first %}border-slate-900 active{% else %}border-transparent opacity-60 hover:opacity-100{% endif %}">
+                        <img src="{{ img }}" class="w-full h-full object-contain mix-blend-multiply">
+                    </button>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+                <div class="p-8 md:p-12 overflow-y-auto custom-scroll h-full flex flex-col">
+                <h1 class="heading-xl text-5xl md:text-8xl uppercase mb-3 tracking-tight leading-[0.85]">
+                    {{ guitar.data | localeField('title', locale) }}
+                </h1>
+                <span class="text-slate-400 text-lg md:text-xl font-light mb-10 block">
+                    {{ guitar.data | localeField('Subtitle', locale) }}
+                </span>
+                
+                {% set concept = guitar.data | localeField('Concept', locale) %}
+                {% if concept %}
+                <div class="prose prose-lg text-slate-600 leading-relaxed mb-12">
+                    <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-4 border-b border-slate-200 pb-2">
+                        {% if locale == 'it' %}Il Concetto{% else %}The Concept{% endif %}
+                    </h3>
+                    <p class="mb-6">{{ concept }}</p>
+                </div>
+                {% endif %}
+
+                {% set history = guitar.data | localeField('History', locale) %}
+                {% if history %}
+                <div class="bg-slate-50 p-6 rounded-lg mb-12">
+                    <h3 class="text-slate-950 font-bold text-sm uppercase tracking-widest mb-4">
+                        {% if locale == 'it' %}Contesto Storico{% else %}Historical Context{% endif %}
+                    </h3>
+                    <p class="text-sm text-slate-500 italic"><span>{{ history }}</span></p>
+                </div>
+                {% endif %}
+
+                <div class="mb-10">
+                    <h3 class="text-slate-950 font-bold text-xs uppercase tracking-widest mb-3 border-b border-slate-100 pb-2">
+                        {% if locale == 'it' %}Specifiche Tecniche{% else %}Technical Specifications{% endif %}
+                    </h3>
+                    <p class="text-[11px] text-slate-400 mb-6 italic">
+                        {% if locale == 'it' %}Queste specifiche sono un punto di partenza. Ogni costruzione è negoziabile: contattami per discutere il tuo stile.{% else %}These specs are a starting point. Every build is negotiable—reach out to discuss your playing style.{% endif %}
+                    </p>
+                    <div class="divide-y divide-slate-100">
+                        {% set specs = guitar.data | localeField('Customization', locale) %}
+                        {% for spec in specs %}
+                            <div class="grid grid-cols-1 md:grid-cols-3 py-4 gap-2">
+                                <span class="mono text-[10px] text-slate-400 uppercase tracking-wider pt-1">{{ spec.key }}</span>
+                                <span class="md:col-span-2 text-sm font-bold uppercase text-slate-800 leading-snug">{{ spec.value }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6 pt-8 border-t border-slate-100">
+                    <a href="/{% if locale == 'it' %}it/{% endif %}contact/" class="btn-primary">
+                        {% if locale == 'it' %}Inizia la Tua Costruzione{% else %}Start Your Build{% endif %}
+                    </a>
+                    <span class="text-xs font-bold uppercase text-slate-400 tracking-widest">
+                        {% if locale == 'it' %}Lista d'Attesa Aperta{% else %}Waitlist Open{% endif %}
+                    </span>
+                </div>
+
+                <div class="mt-24 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+                    <div class="flex items-center gap-4">
+                        <span class="font-bold uppercase tracking-widest text-slate-900">Giungi Guitars</span>
+                        <span class="hidden md:block w-px h-3 bg-slate-300"></span>
+                        <span class="mono">EST. 2017 // ANCONA, IT</span>
+                    </div>
+                </div>
+
+            </div>
+        </article>
+        {% endfor %}
+
+    </div>
+</main>
+
+<script>
+    const galleryState = {};
+    {% for guitar in collections.guitars %}
+    galleryState['{{ guitar.data.slug }}'] = {
+        index: 0,
+        images: {{ guitar.data.images | dump | safe }}
+    };
+    {% endfor %}
+
+    function switchModel(modelId) {
+        // Hide all panels
+        const panels = document.querySelectorAll('.model-panel');
+        panels.forEach(p => p.classList.remove('active'));
+
+        // Deactivate all buttons
+        const btns = document.querySelectorAll('.nav-item');
+        btns.forEach(b => b.classList.remove('active'));
+
+        // Activate specific
+        const target = document.getElementById('model-' + modelId);
+        const btn = document.getElementById('btn-' + modelId);
+        if (target) target.classList.add('active');
+        if (btn) btn.classList.add('active');
+    }
+
+    function navGallery(modelId, direction) {
+        const state = galleryState[modelId];
+        if (!state) return;
+        
+        state.index = (state.index + direction + state.images.length) % state.images.length;
+        changeImage(modelId, state.images[state.index], false);
+    }
+
+    function changeImage(modelId, src, updateState = true) {
+        const mainImg = document.getElementById('img-main-' + modelId);
+        if (!mainImg) return;
+        
+        if (updateState && galleryState[modelId]) {
+            galleryState[modelId].index = galleryState[modelId].images.indexOf(src);
+        }
+
+        // Update thumbnails
+        const panel = document.getElementById('model-' + modelId);
+        const thumbs = panel.querySelectorAll('.thumb-nav');
+        thumbs.forEach((t, i) => {
+            if (galleryState[modelId].images[i] === src) {
+                t.classList.add('border-slate-900', 'active');
+                t.classList.remove('border-transparent', 'opacity-60');
+            } else {
+                t.classList.remove('border-slate-900', 'active');
+                t.classList.add('border-transparent', 'opacity-60');
+            }
+        });
+
+        mainImg.style.opacity = '0.5';
+        setTimeout(() => {
+            mainImg.src = src;
+            mainImg.style.opacity = '1';
+        }, 200);
+    }
+</script>

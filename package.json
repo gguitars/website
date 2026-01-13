@@ -1,5 +1,16 @@
 {
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "start": "npx @11ty/eleventy --serve",
+    "dev": "npx @11ty/eleventy --watch",
+    "cms": "npx decap-server",
+    "dev:all": "npx concurrently \"npm start\" \"npm run cms\""
+  },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
   }
 }

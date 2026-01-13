@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% set nav = siteData.pages.global | localeField('Navigation', locale) %}
+    <title>{{ renderData.title or title }} | {{ nav.Brand | default("Giungi Guitars") }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="antialiased flex flex-col min-h-screen" data-page="{{ page_id }}">
+
+    {% include "nav.html" %}
+
+    <main class="flex-1">
+        {{ content | safe }}
+    </main>
+
+    {% include "footer.html" %}
+
+    <script>
+      // Initialize Lucide icons
+      if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+      }
+
+      // Mobile Menu Toggle
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener('click', () => {
+              mobileMenu.classList.toggle('hidden');
+          });
+      }
+    </script>
+</body>
+</html>

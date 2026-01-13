@@ -1,0 +1,35 @@
+<footer class="border-t border-slate-200 bg-white py-4 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+
+        <div class="flex items-center gap-4 text-xs">
+            {% set nav = siteData.pages.global | localeField('Navigation', locale) %}
+            <span class="font-black uppercase tracking-wider">{{ nav.Brand | default("Giungi Guitars") }}</span>
+            <span class="hidden md:inline w-px h-3 bg-slate-300"></span>
+            {% set footer = siteData.pages.global | localeField('Footer', locale) %}
+            <span class="mono text-[10px] text-slate-500 uppercase">{{ footer.Tagline }}</span>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <a href="mailto:{{ footer.Email }}"
+                class="text-xs font-bold text-slate-500 hover:text-slate-950 transition-colors">
+                {{ footer.Email }}
+            </a>
+
+            <div class="flex items-center gap-4 text-slate-400">
+                {% if footer.Instagram %}
+                <a href="{{ footer.Instagram }}" class="hover:text-slate-950 transition-colors"><i
+                        data-lucide="instagram" class="w-4 h-4"></i></a>
+                {% endif %}
+                {% if footer.Facebook %}
+                <a href="{{ footer.Facebook }}" class="hover:text-slate-950 transition-colors"><i data-lucide="facebook"
+                        class="w-4 h-4"></i></a>
+                {% endif %}
+                {% if footer.YouTube %}
+                <a href="{{ footer.YouTube }}" target="_blank" class="hover:text-slate-950 transition-colors"><i
+                        data-lucide="youtube" class="w-4 h-4"></i></a>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</footer>
