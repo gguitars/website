@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/styles.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body class="antialiased flex flex-col min-h-screen" data-page="{{ page_id }}">
 
@@ -32,6 +33,18 @@
           mobileMenuButton.addEventListener('click', () => {
               mobileMenu.classList.toggle('hidden');
           });
+      }
+    </script>
+    <script>
+      // Netlify Identity - redirect to admin after login
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
       }
     </script>
 </body>
