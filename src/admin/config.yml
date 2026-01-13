@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: giungiguitars/new_website
+  name: git-gateway
   branch: main
-  base_url: https://api.netlify.com
 
 local_backend: true
 
